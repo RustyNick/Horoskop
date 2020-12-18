@@ -14,10 +14,10 @@ async function setHoroscope(){
     const dateinput = document.getElementById("birthInput").value 
     let month = dateinput[5]+dateinput[6]
     let day = dateinput[8]+dateinput[9]
-    console.log(month,day)
+    /* console.log(month,day) */
 
     if(!dateinput.length){
-        console.log("Du behöver skriva in ett datum")
+        /* console.log("Du behöver skriva in ett datum") */
         return
         
     }
@@ -27,8 +27,6 @@ async function setHoroscope(){
     body.set("month",month)
 
     const collectedHorscope = await makeRequest ("./server/addHoroscope.php","POST", body)
-    console.log(collectedHorscope)
-
   
     }
 
@@ -36,14 +34,18 @@ async function setHoroscope(){
 async function getHoroscope(){
     const textbox = document.getElementById("textbox")
     const collectedHorscope = await makeRequest ("./server/viewHoroscope.php","GET")
-    
 
     textbox.innerText = collectedHorscope
+
 }
 //Tabort horscop i session
 async function deleteHoroscope(){
     const collectedHorscope = await makeRequest ("./server/deleteHoroscope.php","POST")
-    console.log(collectedHorscope)
+    if(document.getElementById("textbox").innerText == "false" || document.getElementById("textbox").innerText == "Finns inget att radera"||document.getElementById("textbox").innerText == "Horoskopet är raderad") {
+        document.getElementById("textbox").innerText = "Finns inget att radera"
+    } else {
+        document.getElementById("textbox").innerText = "Horoskopet är raderad"
+    }
 
 }
 
@@ -53,12 +55,12 @@ async function makeRequest(path,method, body) {
             method,
             body
         })
-        console.log(respons)
         return respons.json()
     
     } catch(err) {
-        console.error(err)
+        document.getElementById("textbox").innerText = err;
+        /* console.error(err) */
 
     }
 
-}
+} 
