@@ -3,23 +3,28 @@ document.getElementById("savebtn").addEventListener("click", setHoroscope)
 document.getElementById("getbtn").addEventListener("click", getHoroscope)
 document.getElementById("deletebtn").addEventListener("click", deleteHoroscope)
 
-function initsite(){
 
+function initsite(){
+    getHoroscope()
 }
 
 //skicka med ett namn och spara det namnet med hjälp av post
 async function setHoroscope(){
 
-    const horoscopeSave = document.getElementById("birthInput").value 
+    const dateinput = document.getElementById("birthInput").value 
+    let month = dateinput[5]+dateinput[6]
+    let day = dateinput[8]+dateinput[9]
+    console.log(month,day)
 
-    if(!horoscopeSave.length){
+    if(!dateinput.length){
         console.log("Du behöver skriva in ett datum")
         return
         
     }
-    
+
     const body = new FormData()
-    body.set("horoscope", horoscopeSave )
+    body.set("day",day)
+    body.set("month",month)
 
     const collectedHorscope = await makeRequest ("./server/addHoroscope.php","POST", body)
     console.log(collectedHorscope)
@@ -34,11 +39,11 @@ async function getHoroscope(){
     
 
     textbox.innerText = collectedHorscope
-
-
 }
 //Tabort horscop i session
 async function deleteHoroscope(){
+    const collectedHorscope = await makeRequest ("./server/deleteHoroscope.php","POST")
+    console.log(collectedHorscope)
 
 }
 
@@ -57,5 +62,3 @@ async function makeRequest(path,method, body) {
     }
 
 }
-
-/*Fetch ligger i JS*/
