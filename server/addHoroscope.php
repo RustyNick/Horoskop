@@ -1,7 +1,6 @@
 <?php
 //$_POST skall spara i $_SEESION, RÄKNA UT HOROSKOPET OCH KOLLA OM DET ÄR TOMT I SESSION. ÄR DET INTE DET SÅ SKA IGEN HÄNDA.
 try{
-    $_SESSION = [];
     session_start();
     if(isset($_SERVER["REQUEST_METHOD"])) {
         
