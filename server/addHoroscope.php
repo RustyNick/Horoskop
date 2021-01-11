@@ -17,8 +17,9 @@ try{
                     echo json_encode(true);
                     exit;
                     
-                } else {
-                    throw new Exception("there is a Zodiac saved", 500);
+                } else{
+                    echo json_encode(false);
+                    exit;
                 }
 
             }else {

@@ -15,7 +15,7 @@ session_start();
 
                 } else{
                     //eventuellt lägg ett error här istället
-                    echo json_encode(false);
+                    echo json_encode($_SESSION["horoscope"]);
                     exit;
                     }
 

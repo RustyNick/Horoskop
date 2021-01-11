@@ -26,8 +26,15 @@ async function setHoroscope(){
 
     const collectedHorscope = await makeRequest ("./server/addHoroscope.php","POST", body)
 
+    console.log(collectedHorscope)
     await getHoroscope()
-    console.log(true)
+   /*  if (textbox.innerText = ""){
+        console.log(true)
+        return
+    } else{
+        console.log(false)
+        return
+    } */
     }
 
 //Hämnta namnet och spara i positionen
@@ -36,7 +43,6 @@ async function getHoroscope(){
     const collectedHorscope = await makeRequest ("./server/viewHoroscope.php","GET")
 
     textbox.innerText = collectedHorscope
-
 }
 
 async function updateHoroscope(){
@@ -54,7 +60,7 @@ async function updateHoroscope(){
     body.set("month",month)
 
     const collectedHorscope = await makeRequest ("./server/updateHoroscope.php","POST", body)
-
+    console.log(collectedHorscope)
     await getHoroscope()
 
 }
@@ -63,11 +69,12 @@ async function deleteHoroscope(){
     const collectedHorscope = await makeRequest ("./server/deleteHoroscope.php","POST")
     if(document.getElementById("textbox").innerText == "false" || document.getElementById("textbox").innerText == "Finns inget att radera"||document.getElementById("textbox").innerText == "Horoskopet är raderad") {
         document.getElementById("textbox").innerText = "Finns inget att radera"
-        console.log(false)
+        
     } else {
         document.getElementById("textbox").innerText = "Horoskopet är raderad"
-        console.log(true)
+        
     }
+    console.log(collectedHorscope)
 
 }
 
