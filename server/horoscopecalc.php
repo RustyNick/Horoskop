@@ -1,9 +1,7 @@
 <?php
-  
- function getsign($sign) {
 
-    $day = $_POST["day"];
-    $month = $_POST["month"];
+  function getsign($day,$month) {
+
 
                         if (($month == 1 && $day > 20)||($month==2 && $day < 20)){
                             $_SESSION["horoscope"] = "Aquarius";
